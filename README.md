@@ -8,7 +8,7 @@ go get -u github.com/vodafon/bruteservice
 ### Usage
 
 ```
-bruteservice -company yahoo -services example/services.json -wordlist example/wordlist.txt                                        
+bruteservice -company yahoo -services example/services.json -wordlist example/wordlist.txt
 
 GET https://yahoo.atlassian.net
 GET https://gitlab.com/yahoo
@@ -24,4 +24,23 @@ GET https://github.com/yahoo-com
 GET https://github.com/yahoocom
 GET https://github.com/githubyahoo
 GET https://github.com/yahooprojects
+```
+
+
+### Arguments
+
+```
+bruteservice -h
+
+Usage of bruteservice:
+  -company string
+        company
+  -procs int
+        concurrency (default 6)
+  -services string
+        services config
+  -v int
+        verbose level (default 1)
+  -wordlist string
+        path to wordlist
 ```
