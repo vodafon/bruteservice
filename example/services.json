@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Atlassian",
+    "method": "GET",
+    "url": "https://COMPANY.atlassian.net",
+    "analysis": {
+        "status": 302
+    }
+  },
+  {
+    "name": "YouTrack",
+    "method": "GET",
+    "url": "https://COMPANY.myjetbrains.com",
+    "analysis": {
+        "status": 302,
+        "response_header_key_value": ["location","myjetbrains.com\/youtrack\/"]
+    }
+  },
+  {
+    "name": "S3",
+    "method": "GET",
+    "url": "https://COMPANY.s3.amazonaws.com",
+    "analysis": {
+        "status": 200
+    }
+  },
+  {
+    "name": "GitHub",
+    "method": "GET",
+    "url": "https://github.com/COMPANY",
+    "analysis": {
+        "status": 200
+    }
+  },
+  {
+    "name": "GitLab",
+    "method": "GET",
+    "url": "https://gitlab.com/COMPANY",
+    "analysis": {
+        "status": 200
+    }
+  },
+  {
+    "name": "DockerHubUser",
+    "method": "GET",
+    "url": "https://hub.docker.com/v2/users/COMPANY/",
+    "analysis": {
+        "status": 200
+    }
+  },
+  {
+    "name": "DockerHubOrg",
+    "method": "GET",
+    "url": "https://hub.docker.com/v2/orgs/COMPANY/",
+    "analysis": {
+        "status": 200
+    }
+  }
+]
