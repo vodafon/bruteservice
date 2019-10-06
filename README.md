@@ -1,4 +1,4 @@
-## Briteservice
+## Bruteservice
 
 ### Installation
 ```
