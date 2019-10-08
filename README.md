@@ -8,7 +8,10 @@ go get -u github.com/vodafon/bruteservice
 ### Usage
 
 ```
-bruteservice -company yahoo -services example/services.json -wordlist example/wordlist.txt
+wget https://raw.githubusercontent.com/vodafon/bruteservice/master/example/services.json
+wget https://raw.githubusercontent.com/vodafon/bruteservice/master/example/wordlist.txt
+
+bruteservice -company yahoo -services ./services.json -wordlist ./wordlist.txt
 
 GET https://yahoo.atlassian.net
 GET https://gitlab.com/yahoo
