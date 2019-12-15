@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -26,6 +27,11 @@ var (
 
 	log *verlog.Logger
 )
+
+type client struct {
+	c *http.Client
+	w io.Writer
+}
 
 type Request struct {
 	ServiceName string
@@ -66,13 +72,17 @@ func main() {
 
 	requestC := make(chan Request)
 
+	cl := client{
+		c: httpClient(),
+		w: os.Stdout,
+	}
 	wg := sync.WaitGroup{}
 	for i := 0; i < *flagProcs; i++ {
 		wg.Add(1)
 
 		go func() {
 			for request := range requestC {
-				processRequest(request)
+				processRequest(request, cl)
 			}
 			wg.Done()
 		}()
@@ -106,14 +116,13 @@ func httpClient() *http.Client {
 		},
 	}
 }
-func processRequest(request Request) {
-	client := httpClient()
+func processRequest(request Request, cl client) {
 	req, err := http.NewRequest(request.Method, request.URL, nil)
 	if err != nil {
 		log.Printf(1, "NewRequest error for %s %s: %v", request.Method, request.URL, err)
 		return
 	}
-	resp, err := client.Do(req)
+	resp, err := cl.c.Do(req)
 	if err != nil {
 		log.Printf(1, "Do request error for %s %s: %v", request.Method, request.URL, err)
 		return
@@ -125,7 +134,7 @@ func processRequest(request Request) {
 		return
 	}
 	if match {
-		fmt.Printf("%s %s\n", request.Method, request.URL)
+		fmt.Fprintf(cl.w, "%s %s\n", request.Method, request.URL)
 	}
 }
 
